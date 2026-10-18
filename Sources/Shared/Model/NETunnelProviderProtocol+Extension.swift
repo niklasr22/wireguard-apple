@@ -66,7 +66,7 @@ extension NETunnelProviderProtocol {
         if let oldConfig = providerConfiguration?["WgQuickConfig"] as? String {
             #if os(macOS)
             providerConfiguration = ["UID": getuid()]
-            #elseif os(iOS)
+            #elseif os(iOS) || os(tvOS)
             providerConfiguration = nil
             #else
             #error("Unimplemented")
@@ -81,7 +81,7 @@ extension NETunnelProviderProtocol {
             providerConfiguration = ["UID": getuid()]
             return true
         }
-        #elseif os(iOS)
+        #elseif os(iOS) || os(tvOS)
         /* Update the stored reference from the old iOS 14 one to the canonical iOS 15 one.
          * The iOS 14 ones are 96 bits, while the iOS 15 ones are 160 bits. We do this so
          * that we can have fast set exclusion in deleteReferences safely. */

@@ -1,13 +1,16 @@
-# [WireGuard](https://www.wireguard.com/) for iOS and macOS
+# [WireGuard](https://www.wireguard.com/) for iOS, macOS, and tvOS
 
-This project contains an application for iOS and for macOS, as well as many components shared between the two of them. You may toggle between the two platforms by selecting the target from within Xcode.
+> [!IMPORTANT]
+> This is a fork of [WireGuard/wireguard-apple](https://github.com/WireGuard/wireguard-apple) with Apple TV (tvOS) support.
+
+This project contains applications for iOS, macOS, and tvOS, with shared configuration and tunnel components. Select the platform’s target or scheme in Xcode.
 
 ## Building
 
 - Clone this repo:
 
 ```
-$ git clone https://git.zx2c4.com/wireguard-apple
+$ git clone https://github.com/niklasr22/wireguard-apple.git
 $ cd wireguard-apple
 ```
 
@@ -48,7 +51,7 @@ $ open WireGuard.xcodeproj
      System".
    - Type in `WireGuardGoBridge<PLATFORM>` under the "Product name", replacing the `<PLATFORM>` 
      placeholder with the name of the platform. For example, when targeting macOS use `macOS`, or 
-     when targeting iOS use `iOS`.
+     when targeting iOS use `iOS`, or when targeting tvOS use `tvOS`.
      Make sure the build tool is set to: `/usr/bin/make` (default).
    - In the appeared "Info" tab of a newly created target, type in the "Directory" path under 
      the "External Build Tool Configuration":
@@ -58,14 +61,14 @@ $ open WireGuard.xcodeproj
      ```
      
    - Switch to "Build Settings" and find `SDKROOT`.
-     Type in `macosx` if you target macOS, or type in `iphoneos` if you target iOS.
+     Type in `macosx` if you target macOS, type in `iphoneos` if you target iOS, or `appletvos` if you target tvOS.
    
 3. Go to Xcode project settings and locate your network extension target and switch to 
    "Build Phases" tab.
    
    - Locate "Dependencies" section and hit "+" to add `WireGuardGoBridge<PLATFORM>` replacing 
      the `<PLATFORM>` placeholder with the name of platform matching the network extension 
-     deployment target (i.e macOS or iOS).
+     deployment target (macOS, iOS, or tvOS).
      
    - Locate the "Link with binary libraries" section and hit "+" to add `WireGuardKit`.
    
@@ -75,8 +78,7 @@ $ open WireGuard.xcodeproj
 5. iOS only: Locate Bitcode settings under your application target, Build settings -> Enable Bitcode, 
    change the corresponding value to "No".
    
-Note that if you ship your app for both iOS and macOS, make sure to repeat the steps 2-4 twice, 
-once per platform.
+Repeat steps 2-4 for each platform your app supports.
 
 ## MIT License
 

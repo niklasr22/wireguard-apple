@@ -49,3 +49,5 @@ Sources/WireGuardApp/Config/Developer.xcconfig
 
 # Vim
 .*.sw*
+
+!WireGuard.xcodeproj/xcshareddata/xcschemes/WireGuardtvOS.xcscheme

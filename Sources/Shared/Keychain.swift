@@ -36,8 +36,12 @@ class Keychain {
                                     kSecValueData: value.data(using: .utf8) as Any,
                                     kSecReturnPersistentRef: true]
 
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
+        #if os(tvOS)
+        items[kSecAttrAccessGroup] = Bundle.main.object(forInfoDictionaryKey: "com.wireguard.tvos.keychain_access_group") as? String
+        #else
         items[kSecAttrAccessGroup] = FileManager.appGroupId
+        #endif
         items[kSecAttrAccessible] = kSecAttrAccessibleAfterFirstUnlock
         #elseif os(macOS)
         items[kSecAttrSynchronizable] = false
